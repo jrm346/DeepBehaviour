@@ -7,9 +7,8 @@ class SimpleAgent:
         # type: (str, int, int, int, int) -> None
 
         self.name = name
-        self.history = []  # to be a list of (predicted_reward, real_reward)
         self.model = tf.keras.Sequential()
-        self.model.add(tf.keras.layers.InputLayer(batch_input_shape=(1, inputs)))
+        self.model.add(tf.keras.layers.InputLayer(input_shape=(inputs,)))
         self.model.add(tf.keras.layers.Dense(first_layer, activation='relu'))
         self.model.add(tf.keras.layers.Dense(second_layer, activation='relu'))
         self.model.add(tf.keras.layers.Dense(outputs, activation='linear'))
@@ -27,5 +26,4 @@ class SimpleAgent:
 
     def train(self, environment, true_rewards):
         # type: (numpy.ndarray, numpy.ndarray) -> None
-        self.history.append((self.model.predict(environment), true_rewards))
-        self.model.fit(environment, true_rewards)
+        self.model.fit(environment, true_rewards, verbose=0)
