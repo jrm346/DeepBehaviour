@@ -33,10 +33,12 @@ def plot_latest_actions(game, number_of_actions=20):
 
     return fig
 
+
 def plot_relative_rewards(game):
     """
     Plots the difference in rewards between two agents. If the value is positive it means the row agent did better
-    than the column agent
+    than the column agent.
+
 
     :return:
     """

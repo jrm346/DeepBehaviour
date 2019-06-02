@@ -3,7 +3,16 @@ import numpy
 from .game import Game
 
 
-class TrapGame(Game):
+class TrapVariantGame(Game):
+    """
+    This is a variance on the trap game where your trap doesn't destroy your money. Additionally, stealing cause no
+    depreciation.
+
+        N       T                   S
+    N   money   money-trap_cost     2*money
+    T   money   money-trap_cost     money-hospital
+    S   0       money-trap_cost     money
+    """
     def __init__(self, scheduler, random=True, know_opponent=False, money=1, trap_cost=0.1, hospital_cost=1.5,
                  agents=10, **kwargs):
 

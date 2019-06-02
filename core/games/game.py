@@ -24,7 +24,6 @@ class Game(ABC):
         :param environment_size: The size of the environment, See TrapGame for  an example.
         :param agents: An integer representing the number of agents or a list of strings which are the agent names.
         :param agent_shape: The shape for building the SimpleAgents
-        :param kwargs: Unused
         """
         # Put the reward grid in scores
         # opponent_action x my action
@@ -51,8 +50,9 @@ class Game(ABC):
                     SimpleAgent(str(name), self.environment_size, len(self.scores), agent_shape[0], agent_shape[1])
                     for name in agents]
 
-        # make the scheduler
-        self.scheduler = scheduler.load_agents(agents)
+        # save the scheduler and load the agents
+        self.scheduler = scheduler
+        self.scheduler.load_agents(self.agents)
 
         # this maps agents to integers used for tracking performance
         self.agent_name_to_int = {agent.name: i for i, agent in enumerate(self.agents)}
